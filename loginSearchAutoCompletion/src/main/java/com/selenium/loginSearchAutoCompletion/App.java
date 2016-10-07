@@ -42,8 +42,6 @@ public class App
     	
     	WebElement divThatHasSignIn = dr.findElement(By.className("header_user_info"));
     	
-    	
-    	
     	WebElement signInToClick = divThatHasSignIn.findElement(By.className("login"));
     	
     	//System.out.println(signInToClick.getText());
@@ -55,23 +53,36 @@ public class App
     	dr.navigate().to(login_url);
     	
     //System.out.println(dr.getCurrentUrl());
+    	try{
+    		//WebElement login_form_acc= dr.findElement(By.xpath("//*[@id="login_form"]"));
+    		WebElement form_hasLogin = dr.findElement(By.cssSelector("#login_form"));
+    		WebElement div_login_form=form_hasLogin.findElement(By.cssSelector("#login_form > div")); 
+    		
+    		WebElement div_Login=div_login_form.findElement(By.cssSelector("#login_form > div > div:nth-child(1)"));
+    		WebElement txt_login=div_Login.findElement(By.cssSelector("#email"));
+    		txt_login.sendKeys("anriudhdams@gmail.com");
+    		
+    		WebElement div_Password=div_login_form.findElement(By.cssSelector("#login_form > div > div:nth-child(2)"));
+    		WebElement txt_password=div_Password.findElement(By.cssSelector("#passwd"));
+    		txt_password.sendKeys("qwer1234");
+    		
+    		//#login_form > div > p.submit
+    		WebElement p_Login_Submit=div_login_form.findElement(By.cssSelector("#login_form > div > p.submit"));
+    		WebElement submit_Button=p_Login_Submit.findElement(By.cssSelector("#SubmitLogin"));
+    		submit_Button.click();
+    				
+    		
+    		
+    	}
     	
+    	catch (Exception ee){
     	WebElement form_create_acc = dr.findElement(By.xpath("//*[@id='create-account_form']"));
-    	
     	WebElement formContent = form_create_acc.findElement(By.cssSelector("#create-account_form > div"));
-    	
     	WebElement textBox = formContent.findElement(By.tagName("input"));
-    	
-    	
-    	textBox.sendKeys("shyam_@live.in");
-    	
-    	
+    	textBox.sendKeys("anirudhdams@gmail.com");
     	WebElement submitButton = formContent.findElement(By.cssSelector("#SubmitCreate"));
-    	
     	submitButton.click();
-    	
     	String url2 = "http://automationpractice.com/index.php?controller=authentication&back=my-account#account-creation";
-    	
     	dr.navigate().to(url2);
     	
     	
@@ -83,20 +94,13 @@ public class App
 			e.printStackTrace();
 		}
     	RegisterNewUser(dr,wait);
+    	}
     	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    			
-    	
+    	LoginExistingUser(dr,wait);
     	
     		
     }
-
+    //Account Creation Functionality
 	private static void RegisterNewUser(WebDriver dr,WebDriverWait wait) {
 		
 		
@@ -110,11 +114,11 @@ public class App
 		WebElement firstname = dr.findElement(By.cssSelector("#customer_firstname"));
 		
 		
-		firstname.sendKeys("shriram");
+		firstname.sendKeys("anirudh");
 		
 		WebElement lastname = dr.findElement(By.cssSelector("#customer_lastname"));
 		
-		lastname.sendKeys("jairam");
+		lastname.sendKeys("Maanvi");
 		
 		
 		WebElement password = dr.findElement(By.cssSelector("#passwd"));
@@ -126,21 +130,21 @@ public class App
 		
 		Select dropdown = new Select(dayOfMonth);
 		
-		dropdown.selectByValue("24");
+		dropdown.selectByValue("28");
 		
 		WebElement month = dr.findElement(By.cssSelector("#months"));
 		
 		
 		dropdown = new Select(month);
 		
-		dropdown.selectByValue("7");
+		dropdown.selectByValue("5");
 		
 		WebElement year = dr.findElement(By.cssSelector("#years"));
 		
 		
 		dropdown = new Select(year);
 		
-		dropdown.selectByValue("1989");
+		dropdown.selectByValue("1993");
 		
 		
 		/// Address section
@@ -162,9 +166,9 @@ public class App
 		dr.findElement(By.cssSelector("#postcode")).sendKeys("08854");
 		
 		
-		dr.findElement(By.cssSelector("#phone_mobile")).sendKeys("9802517207");
+		dr.findElement(By.cssSelector("#phone_mobile")).sendKeys("9168059152");
 		
-		dr.findElement(By.cssSelector("#alias")).sendKeys("shyam_@live.in");
+		dr.findElement(By.cssSelector("#alias")).sendKeys("anirudhdams@gmail.com");
 		
 		try {
 			Thread.sleep(4000);
@@ -180,6 +184,24 @@ public class App
 		
 		
 	}
-
+	//Login Functionality
+	private static void LoginExistingUser(WebDriver dr, WebDriverWait wait){
+		WebElement userName=dr.findElement(By.cssSelector("#email"));
+		userName.sendKeys("anirudhdams@gmail.com");
+		
+		WebElement password=dr.findElement(By.cssSelector("#passwd"));
+		password.sendKeys("qwer1234");
+		
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		WebElement submit=dr.findElement(By.cssSelector("#SubmitLogin"));
+		submit.click();
+	
+	}
 	
 }
