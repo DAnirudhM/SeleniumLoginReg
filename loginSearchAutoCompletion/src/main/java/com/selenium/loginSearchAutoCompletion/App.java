@@ -27,7 +27,7 @@ public class App
        //System.out.println( "Hello World!" );
     	
     	System.setProperty("webdriver.chrome.driver",
-    			"C:\\Users\\kaushik\\Downloads\\chromedriver_win32\\chromedriver.exe");
+    			"C:\\Users\\anirudhmaanvi\\Desktop\\Java\\Selenium\\chromedriver.exe");
     	
     	WebDriver dr = new ChromeDriver();
     	
